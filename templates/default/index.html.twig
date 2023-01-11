@@ -3,5 +3,16 @@
 {% block title %}Truiter{% endblock %}
 
 {% block body %}
-<p>{{ message }}</p>
+    <!-- <p>{ { message }}</p>
+    <ul>
+        { % for user in users %}
+        <li>{ { user.username }}</li>
+        { % endfor %}
+    </ul> -->
+
+    <ul>
+        {% for tweet in tweets %}
+            <li>{{ tweet.text }} (@ {{ tweet.author.username }}) | {{ tweet.createdAt | date("d/m/Y") }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
