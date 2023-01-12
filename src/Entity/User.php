@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'idx_username', columns: ['username'])]
@@ -19,18 +20,30 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(length: 15)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $username = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $password = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank]
+    // #[Assert\GreaterThan('today')]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?bool $verified = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Tweet::class)]

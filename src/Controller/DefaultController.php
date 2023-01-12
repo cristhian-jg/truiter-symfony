@@ -6,9 +6,11 @@ use App\Entity\Tweet;
 use App\Entity\User;
 use App\Repository\TweetRepository;
 use App\Repository\UserRepository;
+use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class DefaultController extends AbstractController
 {
@@ -38,8 +40,23 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/home', name: 'home', priority: 10, methods: ["GET"])]
-    public function home(UserRepository $userRepository, TweetRepository $tweetRepository): Response
+    public function home(UserRepository $userRepository, TweetRepository $tweetRepository, ValidatorInterface $validator): Response
     {
+        // $faker = Factory::create();
+        // $user = new User();
+        // $user->setName($faker->name());
+        // $user->setUsername(substr($faker->userName() ,0, 15));
+        // $user->setPassword("0mrY17&12$");
+        // $user->setCreatedAt($faker->dateTimeInInterval('-1 year'));
+        // $user->setVerified(true);
+        // $errors = $validator->validate($user);
+        // dump($errors);
+        // if (count($errors) > 0)
+        // {
+        //    return new Response($errors);
+        //}
+        //$userRepository->save($user, true);
+
         $tweets = $tweetRepository->findBy([], ["createdAt" => "DESC"]);
 
         // return new Response("Bienvenidos a la página principal de Truiter");
