@@ -12,7 +12,7 @@
 
     <ul>
         {% for tweet in tweets %}
-            <li>{{ tweet.text }} (@ {{ tweet.author.username }}) | {{ tweet.createdAt | date("d/m/Y") }}</li>
+            <li>{{ tweet.text }} (@ {{ tweet.author.username }}) | {{ tweet.createdAt | date("d/m/Y h:m:s") }}</li>
         {% endfor %}
     </ul>
 {% endblock %}

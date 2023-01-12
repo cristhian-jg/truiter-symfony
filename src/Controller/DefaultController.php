@@ -40,25 +40,6 @@ class DefaultController extends AbstractController
     #[Route('/home', name: 'home', priority: 10, methods: ["GET"])]
     public function home(UserRepository $userRepository, TweetRepository $tweetRepository): Response
     {
-        $user = new User();
-        $user->setName("Cristhian González");
-        $user->setUsername("cristhianjg");
-        $user->setPassword("0mrY17&12$");
-        $user->setCreatedAt(new \DateTime());
-        $user->setVerified(true);
-
-        $userRepository->save($user);
-
-        $users = $userRepository->findAll();
-
-        $tweet = new Tweet();
-        $tweet->setAuthor($user);
-        $tweet->setCreatedAt(new \DateTime());
-        $tweet->setText("Hello world!");
-        $tweet->setLikeCount(0);
-
-        $tweetRepository->save($tweet, true);
-
         $tweets = $tweetRepository->findBy([], ["createdAt" => "DESC"]);
 
         // return new Response("Bienvenidos a la página principal de Truiter");
