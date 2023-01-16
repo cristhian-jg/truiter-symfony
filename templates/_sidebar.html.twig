@@ -1,0 +1,43 @@
+<nav class="navbar navbar-light flex-column align-items-start">
+    <a class="ms-3 navbar-brand" href="#">
+        <img src="assets/Twitter-logo.svg.png" alt="" width="35" height="30">
+    </a>
+    <br>
+    <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="{{ path('home') }}"><i class="bi bi-house-heart-fill"></i> Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="explore.php"><i class="bi bi-hash"></i> Explorar</a></li>
+        <?php if (!empty($_SESSION["user"])) : ?>
+        <li class="nav-item"><a style="opacity: 0.5" class="nav-link" href=""><i class="bi bi-bell"></i> Notificaciones</a></li>
+        <li class="nav-item"><a style="opacity: 0.5" class="nav-link" href=""><i class="bi bi-envelope"></i> Mensajes</a></li>
+        <li class="nav-item"><a style="opacity: 0.5" class="nav-link" href=""><i class="bi bi-card-list"></i> Listas</a></li>
+        <li class="nav-item"><a class="nav-link" href="profile.php"><i class="bi bi-person-fill"></i> Perfil</a></li>
+        <br>
+        <button style="border: none; border-radius: 30px; background-color: rgb(29, 155, 240)">
+            <a class="nav-link" style="color: white" href="{{ path('tweet_create') }}"> Twittear</a>
+        </button>
+    </ul>
+</nav>
+<nav>
+    <ul class="nav flex-column">
+        {% if app.user %}
+        <li class="nav-item">
+            <a class="nav-link" href=""
+               style="background-color: aliceblue; width: 150px; border-radius: 40px; font-size: 10px">
+                <img style="border-radius: 50%; width: 30px" src="assets/default_icon.png">
+                {{ app.user.username }}
+            </a>
+        </li>
+        <br>
+        <li class="nav-item">
+            <a class="nav-link" href="logout.php"><i class="bi bi-box-arrow-in-left"></i> Cerrar sesión</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="login.php"><i class="bi bi-box-arrow-in-right"></i> Iniciar sesión</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="register.php"><i class="bi bi-node-plus"></i> Registrarse</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
