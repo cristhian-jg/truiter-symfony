@@ -1,10 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'default.html.twig' %}
 
-{% block title %}Hello TweetController!{% endblock %}
+{% block title %}Nuevo tweet{% endblock %}
 
-{% block body %}
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
+{% block content %}
+    {{ form_start(form, { attr: {'novalidate': 'novalidate'}}) }}
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.text) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.author)  }}
+        </div>
+    </div>
     <input type="submit" value="Tuitear">
     {{ form_end(form) }}
 {% endblock %}
